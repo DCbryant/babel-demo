@@ -1,0 +1,49 @@
+Arguments: 
+  /usr/local/bin/node /Users/apple/.yarn/bin/yarn.js add react react-dom
+
+PATH: 
+  /Users/apple/.yarn/bin:/Users/apple/.config/yarn/global/node_modules/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+
+Yarn version: 
+  1.19.1
+
+Node version: 
+  14.16.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry-npm.rd.chanjet.com/@babel%2fcore: ETIMEDOUT
+      at Timeout._onTimeout (/Users/apple/.yarn/lib/cli.js:141224:19)
+      at listOnTimeout (internal/timers.js:554:17)
+      at processTimers (internal/timers.js:497:7)
+
+npm manifest: 
+  {
+    "name": "babel",
+    "version": "1.0.0",
+    "description": "",
+    "main": "console.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@babel/core": "^7.14.6",
+      "@babel/generator": "^7.14.5",
+      "@babel/parser": "^7.14.7",
+      "@babel/plugin-syntax-jsx": "^7.14.5",
+      "@babel/template": "^7.14.5",
+      "@babel/traverse": "^7.14.7",
+      "@babel/types": "^7.14.5"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
