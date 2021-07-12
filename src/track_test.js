@@ -2,7 +2,6 @@ const { transformFromAstSync } = require('@babel/core');
 const  parser = require('@babel/parser');
 const autoTrackPlugin = require('./auto_track_plugin');
 const fs = require('fs');
-const path = require('path');
 
 const sourceCode = `
 import aa from 'aa';
