@@ -6,7 +6,6 @@ const pluginTransformReactJsx = {
   visitor: {
     JSXElement (path) {
       let callExpression = buildJSXElementCall(path);
-      console.log(callExpression, 'callExpression')
       path.replaceWith(callExpression);
     },
   },
@@ -34,35 +33,6 @@ function buildJSXElementCall(path) {
   return call(path, 'jsx', args);
 }
 
-function buildChildren (node) {
-  const elements = [];
-  for (let i = 0; i < node.children.length; i++) {
-    let child = node.children[i];
-    if (types.isJSXText(child)) {
-      elements.push(types.stringLiteral(child.value));
-    }
-  }
-  return elements;
-}
-
-function buildChildrenProperty (children) {
-  let childrenNode;
-  if (children.length === 1) {
-    childrenNode = children[0];
-  } else if (children.length > 1) {
-    childrenNode = types.arrayExpression (children);
-  } else {
-    return undefined;
-  }
-  return types.objectProperty (types.identifier ('children'), childrenNode);
-}
-
-function convertAttribute (node) {
-  const value = node.value;
-  node.name.type = 'Identifier';
-  return types.objectProperty (node.name, value);
-}
-
 function call (path, name, args) {
   const importedSource = 'react/jsx-runtime';
   const callee = addImport(path, name, importedSource);
@@ -85,6 +55,36 @@ function addImport (path, importName, importedSource) {
   );
   programPath.unshiftContainer('body', [statement]);
   return localName;
+}
+
+function buildChildren (node) {
+  const elements = [];
+  for (let i = 0; i < node.children.length; i++) {
+    let child = node.children[i];
+    if (types.isJSXText(child)) {
+      elements.push(types.stringLiteral(child.value));
+    }
+  }
+  return elements;
+}
+
+function buildChildrenProperty (children) {
+  let childrenNode;
+  if (children.length === 1) {
+    childrenNode = children[0];
+  } else if (children.length > 1) {
+    childrenNode = types.arrayExpression (children);
+  } else {
+    return undefined;
+  }
+  return types.objectProperty(types.identifier('children'), childrenNode);
+}
+
+function convertAttribute (node) {
+  const value = node.value;
+  node.name.type = 'Identifier';
+  // 对象属性：值
+  return types.objectProperty(node.name, value);
 }
 
 module.exports = pluginTransformReactJsx;

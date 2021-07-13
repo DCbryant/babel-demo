@@ -22,35 +22,6 @@ const sourceCode = `
     }
 `;
 
-const ast = parser.parse(sourceCode, {
-  sourceType: 'unambiguous',
-  plugins: ['jsx']
-});
-
-// traverse(ast, {
-//     CallExpression(path, state) {
-//       if (
-//         types.isMemberExpression(path.node.callee) && 
-//         path.node.callee.object.name === 'console' && 
-//         ['log', 'info', 'error', 'debug'].includes(path.node.callee.property.name) 
-//       ) {
-//         const { line, column } = path.node.loc.start;
-//         path.node.arguments.unshift(types.stringLiteral(`filename: (${line}, ${column})`))
-//       }
-//     }
-// });
-
-// const targetCalleeName = ['log', 'info', 'error', 'debug'].map(item => `console.${item}`);
-// traverse(ast, {
-//     CallExpression(path, state) {
-//         const calleeName = generate(path.node.callee).code;
-//          if (targetCalleeName.includes(calleeName)) {
-//             const { line, column } = path.node.loc.start;
-//             path.node.arguments.unshift(types.stringLiteral(`filename: (${line}, ${column})`))
-//         }
-//     }
-// })
-
 const targetCalleeName = ['log', 'info', 'error', 'debug'].map(item => `console.${item}`);
 module.exports = function({types, template}) {
     return {
@@ -72,20 +43,6 @@ module.exports = function({types, template}) {
                         path.insertBefore(newNode);
                     }
                 }
-            }
-        }
-    }
-}
-
-const { code, map } = generate(ast);
-// console.log(code, map);
-
-
-module.exports = function({types, template}) {
-    return {
-        visitor: {
-            CallExpression(path, state) {
-                
             }
         }
     }
